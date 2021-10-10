@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+		<link rel="shortcut icon" type="image/png" href="#"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" 
+			integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/style.css" />
+		<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+		<title>Chatcket | Bate-papo</title>
+		<script src="js/login.js"></script>
+		<script type='text/javascript'>
+			checkSession('É necessário efetuar o login primeiro!');
+		</script>
+  </head>
+  <body>
+    <div class="chat-container" id="chat-public">
+      <header class="chat-header">
+        <h1><i class="fas fa-bolt"></i> Chacket </h1>
+				<small class='actual-username'></small>
+        <a href="javascript:ChatPage.roomExit()" class='btn' id="leave-btn" class="btn" title="Sair"><i class="fas fa-sign-in-alt"></i></a>
+      </header>
+      <main class="chat-main">
+				
+        <div class="chat-sidebar">
+					<h2 id="room-name"></h2>
+          <h3><i class="fas fa-users"></i> Online </h3> <small>Modo Público</small>
+					
+					<div id='usersInRoom-container'>
+          	<ul id="users"></ul>
+					</div>
+        </div>
+        <div class="chat-messages" id="chat-messages"></div>
+      </main>
+      <div class="chat-form-container">
+				<a href="javascript:ChatPage.cleanScreen()" class='btn'><i class="fas fa-trash" title="Limpar"></i></a>
+				<input id="msg" name="msg" type="text" placeholder="Digite sua mensagem" required autocomplete="off" />
+				<button type="button" class="btn" id='btnSendMsg' title="Enviar" onclick="ChatPage.sendMessage($('#msg').val())"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+
+		<div class="chat-container" id="chat-private">
+      <header class="chat-header">
+        <h1><i class="fas fa-bolt"></i> Chacket</h1>
+				<small class='actual-username'></small>
+        <a href="javascript:selectPublic()" class='btn' id="leave-btn" class="btn" title="Modo Público"><i class="fas fa-users"></i></a>
+      </header>
+      <main class="chat-main">
+				<div class="chat-sidebar">
+					<small>Modo Privado</small>
+          <h3><i class="fas fa-user"></i> <span id='user-name'></span></h3>
+					<div id='usersInRoom-container'>
+          	<ul id="users"></ul>
+					</div>
+        </div>
+        <div class="chat-messages" id="chat-messages-private"></div>
+      </main>
+      <div class="chat-form-container">
+				<a href="javascript:ChatPage.cleanScreenPvt()" class='btn'><i class="fas fa-trash" title="Limpar"></i></a>
+				<input id="msgPrivate" name="msgPrivate" type="text" placeholder="Digite sua mensagem" required autocomplete="off" />
+				<button type="button" class="btn" id='btnSendMsg' title="Enviar" onclick="ChatPage.sendMessagePrivate($('#msgPrivate').val())"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js" integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4=" crossorigin="anonymous"></script>
+		<script src="js/socket.io.min.js"></script>
+		<script src="js/apiHandler.js"></script>
+		<script src="js/socket.js"></script>
+    <script src="js/choose.js"></script>
+    <script src="js/chat.js"></script>
+		<script type='text/javascript'>
+
+			function manageFields(type) {
+				if (type == 'public') {
+					$("#chat-private").hide();
+					$("#chat-public").show();
+				}
+				else if (type == 'private') {
+					$("#chat-private").show();
+					$("#chat-public").hide();	
+					$("#user-name").text(sessionStorage.getItem('privateUname'));
+				}
+				sessionStorage.setItem('operMode', type);
+			}
+
+			function selectPrivate(uid, uname) {				
+				sessionStorage.setItem('privateUid', uid);
+				sessionStorage.setItem('privateUname', uname);
+				manageFields('private');
+				$(`#newPrivateMsg_${uid}`).hide();
+				ChatPage.recoverPrivateMessages();
+			}
+			function selectPublic() {				
+				sessionStorage.setItem('privateUid', '');
+				sessionStorage.setItem('privateUname', '');
+				manageFields('public');
+			}
+
+			$(document).ready(function() {
+				ChatPage.init();
+				let type = sessionStorage.getItem('operMode') || 'public';
+				manageFields(type);
+			});
+			
+			$('#msg').keydown( function( event ) {
+				if ( event.which === 13 ) {
+					event.preventDefault();
+					ChatPage.sendMessage($('#msg').val());
+				}
+			});
+			$('#msgPrivate').keydown( function( event ) {
+				if ( event.which === 13 ) {
+					event.preventDefault();
+					ChatPage.sendMessagePrivate($('#msgPrivate').val());
+				}
+			});
+		</script>
+  </body>
+</html>

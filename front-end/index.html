@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Chacket | Login</title>
+  <!-- Stylesheets -->
+  <link rel="shortcut icon" type="image/png" href="#"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" 
+			integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" 
+			crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/style3.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+  <script src="js/apiHandler.js"></script>
+  <script src="js/login.js"></script>
+</head>
+
+<body>
+  <div id="container" class="container-fluid">
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+        <div class="fadeIn first">
+					<div class='homeTitle'>
+						<h1><i class="fas fa-bolt"></i> Chacket</h1>
+            <h4>Login</h4>
+          </div>
+        </div>
+
+        <form role="form" method="POST" id="loginForm">
+          <input type="text" id="email" class="fadeIn second" name="email" placeholder="email" style="width:250px;">
+          <input type="password" id="pass" class="fadeIn third" name="pass" placeholder="senha" style="width:250px;">
+					<a href='register.html' type="button" class="btn fadeIn fourth" title="Registrar"> <i class="fa fa-plus"></i></a>
+					<button type="button" class="btn fadeIn fourth" title="Entrar" onclick="login()">	<i class="fa fa-sign-in-alt"></i></button>
+        </form>
+        
+				<div id="formFooter">
+					<h4 id='userAdvice'></h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script type='text/javascript'>
+	let msg = sessionStorage.getItem('userAdvice');
+	if (msg && msg != 'undefined') 
+		$("#userAdvice").text(msg);
+	sessionStorage.setItem('userAdvice', '');
+</script>
+</html> 

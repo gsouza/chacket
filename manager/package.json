@@ -1,0 +1,28 @@
+{
+  "name": "chat",
+  "version": "1.0.0",
+  "description": "real time chat",
+  "main": "middleware/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gsouza/chat.git"
+  },
+  "author": "Guilherme Souza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gsouza/chat/issues"
+  },
+  "homepage": "https://github.com/gsouza/chat#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "moment": "^2.29.1",
+    "mysql": "^2.18.1",
+    "uuid": "^8.3.2"
+  }
+}

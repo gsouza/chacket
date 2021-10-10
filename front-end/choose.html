@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="shortcut icon" type="image/png" href="#"/>
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" 
+			integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+		<script src="js/login.js"></script>
+		<script type='text/javascript'>
+			checkSession('É necessário efetuar o login primeiro!');
+		</script>
+		<script src="js/choose.js"></script>
+		<title>Chatcket | Menu salas</title>
+	</head>
+	<body>
+		<div class="join-container">
+			<header class="join-header">
+				<div>
+					<h1><i class="fas fa-bolt"></i> Chacket </h1>
+				</div>
+			</header>
+			<main class="join-main">
+				<label id='welcomeLabel'></label> <br/>
+				<form role="form" method="POST" id="roomForm">
+					<div class="form-control">
+						<label>Escolha uma das salas abertas</label>
+						<select name="openedRooms" id="openedRooms">
+						</select>
+					</div> 
+					<div>
+						<p class='text-center'> OU </p>
+					</div>
+					<div class="form-control">
+						<label>Crie nova sala</label>
+						<input type="text" name="roomName" id="roomName" placeholder="Digite um nome para nova sala" />
+					</div>
+					<div class="text-center">
+						<button type="button" class="btn" title="Sair" onclick="exit()">	<i class="fas fa-sign-in-alt"></i></button>
+						<button type="button" class="btn" title="Avançar" onclick="ChoosePage.roomEntrance()">	<i class="fas fa-arrow-alt-circle-right"></i></button>
+					</div>
+				</form>
+			</main>
+		</div>
+	</body>
+	<script src="js/apiHandler.js"></script>
+	<script type='text/javascript'>
+		$(document).ready( function () {			
+			ChoosePage.init();
+		});
+	</script>
+</html>
