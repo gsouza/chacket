@@ -1,15 +1,16 @@
 # Chacket
-* Esse projeto é uma POC numa tentativa de recriação simplificada das antigas salas de batepapos via web socket em tempo real com intuito de aprendizado e provar de conceito.
-* Composto por 2 módulos de micros serviços (manager e server) e os arquivos do front-end.
+* This project is a POC - proof of concept in a tentative of simplified recriation of old chat rooms.
+* It has 2 micro-services modules (manager and server) as well as front-end files.
+* It uses the library socket.io to get real time conversations.
 
  # /manager
- * Sw intermediário, implementa uma API e faz as persistências dos dados no banco mysql utilizando a porta 45000;
+ * Sw middleware, implements an API and persists data in mysql server.
 
  # /server
- * Sw que servirá as aplicação com as trocas de mensagems em tempo real via websocket além de instanciar um httpserver também para as requisições do o front.
-
+ * It will serve the application with messages exchanges via socket besides to serve as a simple http server to handle all front requisitions.
+ 
  # /front-end
- * Sw interface de usuário da aplicação.
+ * Simple User interface
 
  # Arquitetura
  ![alt text](bd/chacket_arch.png?)
